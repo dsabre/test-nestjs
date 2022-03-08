@@ -1,0 +1,30 @@
+{% extends "../base.html.twig" %}
+
+{% set pageTitle = 'News' %}
+
+{% block title %}{{ pageTitle }}{% endblock %}
+
+{% block content %}
+    <h1 class="text-3xl font-bold mb-4">
+        {{ pageTitle }}
+    </h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-4">
+        {% for item in news %}
+            <a href="/news/{{ item.id }}" class="border rounded shadow-md hover:shadow-slate-500/50">
+                {% if item.image %}
+                    <img src="{{ item.image }}" alt="{{ item.title|striptags }}" class="rounded-t">
+                {% endif %}
+
+                <div class="p-3">
+                    <h2 class="font-bold text-lg">
+                        {{ item.title|striptags }}
+                    </h2>
+                    <div>
+                        {{ item.teaser|striptags }}
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}

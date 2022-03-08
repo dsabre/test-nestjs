@@ -1,0 +1,27 @@
+{% import '_globals.html.twig' as globals %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="/css/style.css" rel="stylesheet">
+    {% block stylesheets %}{% endblock %}
+
+    <title>{% block title %}{% endblock %} | {{ globals.siteTitle }}</title>
+</head>
+<body>
+
+<div class="relative min-h-screen md:flex">
+    {% include 'sections/topbar.html.twig' %}
+    {% include 'sections/sidebar.html.twig' %}
+
+    <div class="flex-1 p-4 max-h-screen overflow-y-scroll">
+        {% block content %}{% endblock %}
+    </div>
+</div>
+
+<script src="/scripts/sidebar.js"></script>
+{% block javascripts %}{% endblock %}
+</body>
+</html>
