@@ -1,4 +1,4 @@
-import {Controller, Get, Param, Render} from "@nestjs/common";
+import {Controller, Get, HttpException, HttpStatus, Param, Render} from "@nestjs/common";
 import axios from "axios";
 
 async function getNews() {
@@ -29,10 +29,14 @@ export class NewsController {
 	@Get(":id")
 	@Render("pages/news-details")
 	async details(@Param() params): Promise<object> {
-		const news = await Promise.all(await getNews());
+		const news = (await Promise.all(await getNews())).filter(n => n.id == parseInt(params.id));
+
+		if (news.length < 1) {
+			throw new HttpException('Not found', HttpStatus.NOT_FOUND);
+		}
 
 		return {
-			newsDetails: news.filter(n => n.id == parseInt(params.id))[0]
+			newsDetails: news[0]
 		};
 	}
 }

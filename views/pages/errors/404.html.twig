@@ -1,0 +1,13 @@
+{% extends "../../base.html.twig" %}
+
+{% set pageTitle = 'Pagina non trovata' %}
+
+{% block title %}{{ pageTitle }}{% endblock %}
+
+{% block content %}
+    <div class="bg-red-500 h-full">
+        <h1 class="text-5xl font-bold text-center text-gray-500">
+            {{ pageTitle }}
+        </h1>
+    </div>
+{% endblock %}

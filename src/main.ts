@@ -3,6 +3,7 @@ import {AppModule} from "./app.module";
 import {NestExpressApplication} from "@nestjs/platform-express";
 import {join} from "path";
 import * as nunjucks from "nunjucks";
+import {HttpExceptionFilter} from "./filters/http-exception.filter";
 
 async function bootstrap() {
 	const app = await NestFactory.create<NestExpressApplication>(
@@ -10,6 +11,8 @@ async function bootstrap() {
 	);
 
 	const VIEWS_DIRECTORY = "views";
+
+	app.useGlobalFilters(new HttpExceptionFilter);
 
 	app.useStaticAssets(join(__dirname, "..", "public"));
 	app.setBaseViewsDir(join(__dirname, "..", VIEWS_DIRECTORY));
